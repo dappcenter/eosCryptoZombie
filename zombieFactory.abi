@@ -1,0 +1,11 @@
+{
+    "structs": [{
+        "name": "Zombie",
+        "base": "",
+        "fields": {
+            "name": "string",
+            "dna": "uint32"
+        }
+    }
+    ]
+}

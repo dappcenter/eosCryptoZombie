@@ -20,7 +20,7 @@ uint32_t generate_random_dna(eosio::string str) {
     return rand;
 }
 
-void createRandomZombie(eosio::string name) {
+void createRandomZombie(std::string name) {
     uint32_t randDna = generate_random_dna(name);
     create_zombie(name, randDna);
 }
