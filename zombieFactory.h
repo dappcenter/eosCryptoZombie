@@ -23,6 +23,14 @@ namespace zombieFactory {
     };
 
     std::vector<Zombie> zombies;
+
+    /* @abi action store_zombie
+    * @abi table
+    */
+    struct zombie_to_owner {
+        account_name account;
+        uint32_t id;
+    };
 }
 
 
