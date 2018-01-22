@@ -11,11 +11,11 @@ namespace ZOMBIES {
      */
     uint32_t generate_random_dna(eosio::string str) {
         //TODO: Add hash function of str
-        uint32_t rand = 8356281049284737;
+        unsigned long long rand = 8356281049284737;
         return rand;
     }
 
-    void createRandomZombie(const create& c) {
+    void apply_create_random_zombie(const create& c) {
         uint32_t randDna = generate_random_dna(c.name);
         Zombie zombie_to_create(c.owner, c.name, randDna);
         Zombies::store(zombie_to_create, c.owner);
@@ -39,7 +39,7 @@ extern "C" {
     /// The apply method implements the dispatch of events to this contract
     void apply( uint64_t code, uint64_t action_name ) {
         if (code == N(zombieFactory)) {
-            if (action_name == N(createRandomZombie)) {
+            if (action_name == N(createRandomZombie)){
                 ZOMBIES::apply_create_random_zombie(current_message<ZOMBIES::create>());
             }
         }

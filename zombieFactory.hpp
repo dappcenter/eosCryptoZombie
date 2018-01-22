@@ -2,16 +2,17 @@
 // Created by Ludvig Kratz on 2018-01-14.
 //
 
-#include <stdio.h>
-#include <math.h>
+//#include <stdio.h>
+//#include <math.h>
 #include <eoslib/eos.hpp>
 #include <eoslib/db.hpp>
+#include <eoslib/string.hpp>
 
 
 using namespace eosio;
 namespace zombieFactory {
     const uint8_t dnaDigits = 16;
-    const uint8_t dnaModulus = pow(10, dnaDigits);
+    //const uint8_t dnaModulus = pow(10, dnaDigits);
 
     struct Zombie {
         Zombie() {};
@@ -39,7 +40,3 @@ namespace zombieFactory {
      */
 
 }
-
-
-
-#endif //EOSCRYPTOZOMBIE_ZOMBIEFACTORY_H
