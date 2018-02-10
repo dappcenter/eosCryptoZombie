@@ -53,6 +53,7 @@ extern "C" {
      *  This method is called once when the contract is published or updated.
      */
     void init()  {
+        eosio::print( "Init!\n" );
     }
 
     /// The apply method implements the dispatch of events to this contract

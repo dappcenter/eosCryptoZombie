@@ -43,6 +43,6 @@ namespace zombieFactory {
                                  uint64_t>;        // Data type of table's key (first uint64_t that's defined in struct
                                                    // will be the key
     // Mapping of a users' zombies
-    using ZombieToOwners = eosio::table<N(zombiefac), N(zombiefac), N(owners), ZombieToOwner, uint64_t>;
+    using ZombieToOwners = eosio::table<N(zombiefac), N(zombiefac), N(zombieToOwners), ZombieToOwner, uint64_t>;
 
 }

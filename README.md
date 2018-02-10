@@ -1,5 +1,5 @@
 # eosCryptoZombie
-EOS implementation of Loom Networks' tutorial game [CryptoZombies](https://cryptozombies.io)
+[EOS](https://github.com/EOSIO/eos) implementation of Loom Networks' tutorial game [CryptoZombies](https://cryptozombies.io)
 
 ## Deploying to local testnet
 ##### Have eosd running
