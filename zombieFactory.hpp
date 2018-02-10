@@ -11,32 +11,38 @@
 
 using namespace eosio;
 namespace zombieFactory {
-    const uint8_t dnaDigits = 16;
-    //const uint8_t dnaModulus = pow(10, dnaDigits);
 
     struct Zombie {
         Zombie() {};
-        Zombie(account_name owner, eosio::string name, uint32_t dna):owner(owner), name(name), dna(dna) {};
-        account_name owner; // Owner of the zombie, this will also be the key in the db (How to make sure each dna is u
-                            // unique?
+        Zombie(account_name owner, eosio::string name, uint64_t dna):owner(owner), name(name), dna(dna) {};
+        uint64_t dna; // DNA of zombie will be the key (since this is the first uint64_t in the struct)
+        account_name owner; // Owner of the zombie
         eosio::string name;
-        uint32_t dna;
     };
 
+    struct ZombieToOwner {
+        ZombieToOwner() {};
+        ZombieToOwner(account_name owner):owner(owner) { counter = 0; };
+        account_name owner; //Database table key
+        uint8_t max_zombies = 10; // Maximum 10 zombies per account, make vector?
+        uint64_t zombies[10]; //List of zombie DNA this user owns, TODO: maybe make it Zombie object
+        uint64_t counter; // i.e length of zombies array
+    };
+
+    // Defines a action used when calling the smart contract
     struct create {
         account_name owner;
         eosio::string name;
     };
 
-    using Zombies = eosio::table<N(zombieFactory), N(zombieFactory), N(zombies), Zombie, uint64_t>;
-
-    /* @abi action store_zombie
-    * @abi table
-
-    struct zombie_to_owner {
-        account_name account;
-        uint32_t id;
-    };
-     */
+    // Define database table on blockchain
+    using Zombies = eosio::table<N(zombiefac), // default scope
+                                 N(zombiefac), // Defines account that has write access
+                                 N(zombies),       // Name of the table
+                                 Zombie,           // Structure of table (c++ struct)
+                                 uint64_t>;        // Data type of table's key (first uint64_t that's defined in struct
+                                                   // will be the key
+    // Mapping of a users' zombies
+    using ZombieToOwners = eosio::table<N(zombiefac), N(zombiefac), N(owners), ZombieToOwner, uint64_t>;
 
 }

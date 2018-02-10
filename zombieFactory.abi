@@ -1,45 +1,44 @@
 {
-  "types": [{
-      "new_type_name": "account_name",
-      "type": "name"
-    }
-  ],
-  "structs": [{
-      "name": "transfer",
-      "base": "",
-      "fields": {
-        "from": "account_name",
-        "to": "account_name",
-        "amount": "uint64"
-      }
+    "structs": [{
+        "name": "Zombie",
+        "base": "",
+        "fields": {
+            "owner": "account_name",
+            "name": "string",
+            "dna": "uint64"
+        }
     },{
-      "name": "account",
-      "base": "",
-      "fields": {
-        "account": "name",
-        "balance": "uint64"
-      }
-    },
+        "name": "ZombieToOwner",
+        "base": "",
+        "fields": {
+            "owner": "account_name",
+            "zombies": "uint64[]",
+            "counter": "uint64"
+        }
+    }
     {
-      "name": "Zombie",
-      "base": "",
-      "fields": {
-        "name": "string",
-        "dna": "uint32"
-      }
-    }
-  ],
-  "actions": [{
-      "action_name": "transfer",
-      "type": "transfer"
-    }
-  ],
-  "tables": [{
-      "table_name": "account",
-      "type": "account",
-      "index_type": "i64",
-      "key_names" : ["account"],
-      "key_types" : ["name"]
-    }
-  ]
+        "name": "create",
+        "base": "",
+        "fields": {
+            "owner": "account_name",
+            "name": "string"
+        }
+    }],
+    "actions": [{
+        "action_name": "create",
+        "type": "create"
+    }],
+    "tables": [{
+        "table_name": "Zombies",
+        "type": "Zombie",
+        "index_type": "i64",
+        "key_names": ["dna"],
+        "key_types": ["uint64"]
+    },{
+        "table_name": "ZombieToOwners",
+        "type": "ZombieToOwner",
+        "index_type": "i64",
+        "key_names": ["owner"],
+        "key_types": ["account_name"]
+    }]
 }
