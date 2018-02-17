@@ -10,15 +10,15 @@ $ ./eosd
 
 ##### Create account for contract 
 ```
-$ eosc create key
+$ ./eosc create key
 Private key:###
 Public key: ###
-$ eosc create key
+$ ./eosc create key
 Private key:###
 Public key: ###
-$ eosc wallet import ${private_key_1}
+$ ./eosc wallet import ${private_key_1}
 imported private key for: ${public_key_1}
-$ eosc wallet import ${private_key_2}
+$ ./eosc wallet import ${private_key_2}
 imported private key for: ${public_key_2}
 § ./eosc create account inita zombiefac ${public_key_1} ${public_key_2}
 ```
@@ -31,11 +31,6 @@ imported private key for: ${public_key_2}
 ##### Deploy contract
 ```
 ./eosc set contract zombiefac ~/path/to/project/zombieFactory.wast ~/path/to/project/zombieFactory.abi
-```
-Currently returns
-```
-2486923ms            main.cpp:1195                 main                 ] Failed with error: Assert Exception (10)
-to_string() == string(str): name not properly normalized
 ```
 
 

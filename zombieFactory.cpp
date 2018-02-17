@@ -19,24 +19,24 @@ namespace ZOMBIES {
     void apply_create_random_zombie(const create& c) {
 
         // Check if creator has an account in the ZombieToOwner table, otherwise create one
-        ZombieToOwner zombie_to_owner;
-        bool account_exists = ZombieToOwners::get(c.owner, zombie_to_owner, N(zombiefac));
+        zombie_owner zombie_to_owner;
+        bool account_exists = Owners::get(c.owner, zombie_to_owner, N(zombiefac));
         if (account_exists == false) {
             // Create account with zero zombies
-            ZombieToOwner zombie_to_owner(c.owner);
-            ZombieToOwners::store(zombie_to_owner, c.owner);
+            zombie_owner zombie_to_owner(c.owner);
+            Owners::store(zombie_to_owner, c.owner);
         }
         assert(zombie_to_owner.counter <= 10, "Maximum of 10 zombies per account!");
 
         // Generate a random zombie and store it in database
         uint64_t randDna = generate_random_dna(c.name);
-        Zombie zombie_to_create(c.owner, c.name, randDna);
+        zombie zombie_to_create(c.owner, c.name, randDna);
         Zombies::store(zombie_to_create, c.owner);
 
         // Update the owner table information
         zombie_to_owner.zombies[zombie_to_owner.counter + 1] = zombie_to_create.dna;
         zombie_to_owner.counter++;
-        ZombieToOwners::update(zombie_to_owner, zombie_to_owner.owner);
+        Owners::update(zombie_to_owner, zombie_to_owner.owner);
 
     }
 } //namespace ZOMBIES
@@ -59,7 +59,7 @@ extern "C" {
     /// The apply method implements the dispatch of events to this contract
     void apply( uint64_t code, uint64_t action_name ) {
         if (code == N(zombiefac)) {
-            if (action_name == N(createRandomZombie)){
+            if (action_name == N(create)){
                 ZOMBIES::apply_create_random_zombie(current_message<ZOMBIES::create>());
             }
         }

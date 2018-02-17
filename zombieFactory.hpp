@@ -12,17 +12,17 @@
 using namespace eosio;
 namespace zombieFactory {
 
-    struct Zombie {
-        Zombie() {};
-        Zombie(account_name owner, eosio::string name, uint64_t dna):owner(owner), name(name), dna(dna) {};
+    struct zombie {
+        zombie() {};
+        zombie(account_name owner, eosio::string name, uint64_t dna):owner(owner), name(name), dna(dna) {};
         uint64_t dna; // DNA of zombie will be the key (since this is the first uint64_t in the struct)
         account_name owner; // Owner of the zombie
         eosio::string name;
     };
 
-    struct ZombieToOwner {
-        ZombieToOwner() {};
-        ZombieToOwner(account_name owner):owner(owner) { counter = 0; };
+    struct zombie_owner {
+        zombie_owner() {};
+        zombie_owner(account_name owner):owner(owner) { counter = 0; };
         account_name owner; //Database table key
         uint8_t max_zombies = 10; // Maximum 10 zombies per account, make vector?
         uint64_t zombies[10]; //List of zombie DNA this user owns, TODO: maybe make it Zombie object
@@ -39,10 +39,10 @@ namespace zombieFactory {
     using Zombies = eosio::table<N(zombiefac), // default scope
                                  N(zombiefac), // Defines account that has write access
                                  N(zombies),       // Name of the table
-                                 Zombie,           // Structure of table (c++ struct)
+                                 zombie,           // Structure of table (c++ struct)
                                  uint64_t>;        // Data type of table's key (first uint64_t that's defined in struct
                                                    // will be the key
     // Mapping of a users' zombies
-    using ZombieToOwners = eosio::table<N(zombiefac), N(zombiefac), N(zombieToOwners), ZombieToOwner, uint64_t>;
+    using Owners = eosio::table<N(zombiefac), N(zombiefac), N(owners), zombie_owner, uint64_t>;
 
 }

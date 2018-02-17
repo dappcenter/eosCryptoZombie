@@ -1,6 +1,6 @@
 {
     "structs": [{
-        "name": "Zombie",
+        "name": "zombie",
         "base": "",
         "fields": {
             "owner": "account_name",
@@ -8,7 +8,7 @@
             "dna": "uint64"
         }
     },{
-        "name": "ZombieToOwner",
+        "name": "zombie_owner",
         "base": "",
         "fields": {
             "owner": "account_name",
@@ -29,14 +29,14 @@
         "type": "create"
     }],
     "tables": [{
-        "table_name": "Zombies",
-        "type": "Zombie",
+        "table_name": "zombies",
+        "type": "zombie",
         "index_type": "i64",
         "key_names": ["dna"],
         "key_types": ["uint64"]
     },{
-        "table_name": "ZombieToOwners",
-        "type": "ZombieToOwner",
+        "table_name": "owners",
+        "type": "zombie_owner",
         "index_type": "i64",
         "key_names": ["owner"],
         "key_types": ["account_name"]
